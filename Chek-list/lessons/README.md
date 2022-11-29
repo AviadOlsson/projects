@@ -12,9 +12,9 @@
 from tkinter import *
 ```
 
-После импорта библиотеки можно добавлять, редактировать и настраивать [объекты](#методы-функции-конструкторы)
+После импорта библиотеки можно добавлять, редактировать и настраивать [объекты](#-конструкторы-и-методы)
 
-## Методы, функции, конструкторы
+## Конструкторы и методы
 
 ### Конструкторы
 
@@ -70,4 +70,58 @@ label.pack()    #Здесь label - переменная которая соде
 button.pack()   #Здесь button - переменная которая содержит в себе конструктор кнопки с заднными параметрами
 ```
 
-### Функции
+## Диалоговые окна
+
+Диалоговые окна предназначены для вывода сообщений пользователю, получения от него какой-либо информации и управления.
+
+Следующий код, является примером создания диалогового окна:
+
+```Python
+from tkinter import *
+
+window = Tk()
+window.title("Message box title")
+window.geometry("300x75")
+label = Label(window, text="My message content!")
+label.pack()
+button = Button(window, text="Ok", width=10, command=window.destroy)
+button.pack(side=RIGHT)
+window.mainloop()
+```
+
+Однако, нет необходимости каждый раз создавать диалоговое окно с нуля. Можно использовать уже готовые варианты предоставленные в библиотеке `Tkinter`.
+
+### Messagebox - информационное окно
+
+Далее будут перечислены возможные варианты готовых информационных окон. Для их использования необходимо импортировать соответсвующий модуль `messagebox` библиотеки `Tkinter` и передать в аргументы текст заголовка а также текст сообщения.
+
+```Python
+messagebox.showinfo('Message title', 'Message info content')    #Окно с иконкой информации
+messagebox.showwarning('Message warning title', 'Message warning content')      #Предупреждающее окно
+messagebox.showerror('Message error title', 'Message error content')        #Окно ошибки
+```
+
+Следующие примеры позволяют сохранить ответ пользователя в переменной:
+
+```Python
+response = messagebox.askquestion('Message title', 'Message ask content')  #Окно с вопросом
+response = messagebox.askyesno('Message title', 'Message y/n content')     #Окно с выбором вариантов Да/Нет
+response = messagebox.askyesnocancel('Message title', 'Message y/n/cancel content')    #Окно с выбором вариантов Да/Нет/Отмена
+response = messagebox.askokcancel('Message title', 'Message ok/cancel content')        #Окно с выбором вариантов Ок/Отмена
+response = messagebox.askretrycancel('Message title', 'Message retry/cancel content')      #Окно с выбором варинтов Повторить/Отмена
+```
+
+С помощью `Tkinter` можно запрограммировать вызов диалоговых окон открытия и сохранения файлов а также работу с ними. Для начала, необходимо импортировать модуль `filedialog` в котором описаны классы для окон работающих с файлами.
+
+Ниже представлен код, в котором сначала вызывается диалоговое окно "Открыть" а после "Сохранить как...". Если не создать переменную `root` программа завершить работу с ошибкой:
+
+```Python
+from tkinter import *
+from tkinter import filedialog
+
+root = Tk()
+document_open = filedialog.askopenfilename()
+document_save = filedialog.asksaveasfilename()
+
+root.mainloop()
+```
